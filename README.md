@@ -36,7 +36,7 @@ We also ask that you update the readme with answers to the following questions
 - Extract currency and date format  to helper functions.
 - Simplify account sections by combining some components or creating a specific section component that takes a title and content.
 - Maybe not use the inline style when aligning the badge, however, I would follow the precedent set in the repo for this. An alternative would be to set the alignment in  `InfoRow` , but I chose to keep that styling more general so it could be used in the future.
-- Maybe rework data fetching to have a loading state and fetch the data in the component. I opted for `getServerSideProps` because the page didn’t seem functional without that data so this would allow it to be preloaded. Although if done properly it should utilise the import the function to get data rather than calling the API route, as well as properly getting the `server` variable based on the environment.
+- Maybe rework data fetching to have a loading state and fetch the data in the component. I opted for `getServerSideProps` because the page didn’t seem functional without that data so this would allow it to be pre-rendered. Although if done properly it should utilise the import the function to get data rather than calling the API route, as well as properly getting the `server` variable based on the environment.
 
 2. What UX or design improvements or alterations might you suggest? These can be to existing components or completely new ideas.
 - Darker colour for text on page to improve contrast.
