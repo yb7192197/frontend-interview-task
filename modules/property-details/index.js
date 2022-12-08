@@ -1,44 +1,30 @@
 /* eslint-disable max-statements */
-import { add, format } from "date-fns";
+import { add, format, differenceInCalendarYears } from "date-fns";
 import React from "react";
 import { Button } from "../../components/button";
+import Badge from "../../components/badge";
 import RowContainer from "../../components/row-container";
 import {
-  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, Inset
+  AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, Inset, InfoRow
 } from "./style";
 
-
-const account = {
-  uid: "65156cdc-5cfd-4b34-b626-49c83569f35e",
-  deleted: false,
-  dateCreated: "2020-12-03T08:55:33.421Z",
-  currency: "GBP",
-  name: "15 Temple Way",
-  bankName: "Residential",
-  type: "properties",
-  subType: "residential",
-  originalPurchasePrice: 250000,
-  originalPurchasePriceDate: "2017-09-03",
-  recentValuation: { amount: 310000, status: "good" },
-  associatedMortgages: [
-    {
-      name: "HSBC Repayment Mortgage",
-      uid: "fb463121-b51a-490d-9f19-d2ea76f05e25",
-      currentBalance: -175000,
-    },
-  ],
-  canBeManaged: false,
-  postcode: "BS1 2AA",
-  lastUpdate: "2020-12-01T08:55:33.421Z",
-  updateAfterDays: 30,
-};
-
-const Detail = ({}) => {
+const Detail = ({ account }) => {
   let mortgage;
   const lastUpdate = new Date(account.lastUpdate);
   if (account.associatedMortgages.length) {
     mortgage = account.associatedMortgages[0];
   }
+
+  const sincePurchase =
+    account.recentValuation.amount - account.originalPurchasePrice;
+  const sincePurchasePercentage = sincePurchase / account.originalPurchasePrice;
+  const annualAppreciation =
+    sincePurchasePercentage /
+    differenceInCalendarYears(
+      new Date(),
+      new Date(account.originalPurchasePriceDate)
+    );
+  const valuationColour = { good: "green", bad: "red", neutral: "grey" };
 
   return (
     <Inset>
@@ -72,6 +58,66 @@ const Detail = ({}) => {
           </AccountList>
         </RowContainer>
       </AccountSection>
+      {account.recentValuation && (
+        <AccountSection>
+          <AccountLabel>Valuation changes</AccountLabel>
+          <RowContainer>
+            <AccountList>
+              <AccountListItem>
+                <InfoText>
+                  {"Purchased for "}
+                  <b>
+                  {new Intl.NumberFormat("en-GB", {
+                    style: "currency",
+                    currency: "GBP",
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }).format(Math.abs(account.originalPurchasePrice))}
+                  </b>
+                  {` in ${format(new Date(account.originalPurchasePriceDate), "MMMM yyyy")}`}
+                </InfoText>
+              </AccountListItem>
+              <AccountListItem>
+                <InfoRow>
+                  Since purchase
+                  <Badge
+                    style={{marginLeft: 'auto'}}
+                    colour={valuationColour[account.recentValuation.status]}
+                  >
+                    {`${new Intl.NumberFormat("en-GB", {
+                      style: "currency",
+                      currency: "GBP",
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    }).format(sincePurchase)} (${
+                      new Intl.NumberFormat("en-GB", {
+                        style: "percent",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2,
+                      }).format(sincePurchasePercentage)
+                     })`}
+                  </Badge>
+                </InfoRow>
+              </AccountListItem>
+              <AccountListItem>
+                <InfoRow>
+                  Annual appreciation
+                  <Badge
+                    style={{marginLeft: 'auto'}}
+                    colour={valuationColour[account.recentValuation.status]}
+                  >
+                    {new Intl.NumberFormat("en-GB", {
+                      style: "percent",
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 2,
+                    }).format(annualAppreciation)}
+                  </Badge>
+                </InfoRow>
+              </AccountListItem>
+            </AccountList>
+          </RowContainer>
+        </AccountSection>
+      )}
       {mortgage && (
         <AccountSection>
           <AccountLabel>Mortgage</AccountLabel>
