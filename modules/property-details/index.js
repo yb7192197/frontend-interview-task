@@ -65,16 +65,16 @@ const Detail = ({ account }) => {
             <AccountList>
               <AccountListItem>
                 <InfoText>
-                  Purchased for{" "}
-                  <span style={{fontWeight: 'bold'}}>
+                  {"Purchased for "}
+                  <b>
                   {new Intl.NumberFormat("en-GB", {
                     style: "currency",
                     currency: "GBP",
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0,
                   }).format(Math.abs(account.originalPurchasePrice))}
-                  </span>{" "}
-                  in {format(new Date(account.originalPurchasePriceDate), "MMMM yyyy")}
+                  </b>
+                  {` in ${format(new Date(account.originalPurchasePriceDate), "MMMM yyyy")}`}
                 </InfoText>
               </AccountListItem>
               <AccountListItem>
