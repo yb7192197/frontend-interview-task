@@ -2,7 +2,7 @@
 import { add, format, differenceInCalendarYears } from "date-fns";
 import React from "react";
 import { Button } from "../../components/button";
-import { Badge } from "../../components/badge";
+import Badge from "../../components/badge";
 import RowContainer from "../../components/row-container";
 import {
   AccountHeadline, AccountLabel, AccountList, AccountListItem, AccountSection, InfoText, Inset, InfoRow

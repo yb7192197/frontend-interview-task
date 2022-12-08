@@ -13,7 +13,7 @@ const getBadgeColours = (colour) => {
   }
 };
 
-export const Badge = styled.div`
+const Badge = styled.div`
   padding: 0 ${(props) => props.theme.space.m};
   ${({ colour }) => getBadgeColours(colour)};
   border-radius: 9999px;
@@ -23,3 +23,5 @@ export const Badge = styled.div`
 Badge.propTypes = {
   colour: PropTypes.string,
 };
+
+export default Badge

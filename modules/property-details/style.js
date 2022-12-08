@@ -27,11 +27,8 @@ export const InfoText = styled.div`
   color: ${(props) => props.theme.colors.neutral[600]};
 `;
 
-export const InfoRow = styled.div`
-  line-height: 1.6;
-  font-size: ${(props) => props.theme.typography.m.fontSize};
-  color: ${(props) => props.theme.colors.neutral[600]};
-  display: inline-flex;
+export const InfoRow =  styled(InfoText)`
+  display: flex;
   width: 100%;
   align-items: center;
 `;
