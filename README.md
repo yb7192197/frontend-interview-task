@@ -29,10 +29,23 @@ Consider opportunities to reduce repetition in the code and increase legibility
 - This could be creating new components, simplifying existing ones, extracting helper function to simplify code or styling
 - Show us what you can do and implement a few of these if you have time
 
-We also ask that you update the readme with answers to the following questions 
+We also ask that you update the readme with answers to the following questions
 
 1. Given more time, what other changes you would have liked to make?
+- Add tests.
+- Extract currency and date format  to helper functions.
+- Simplify account sections by combining some components or creating a specific section component that takes a title and content.
+- Maybe not use the inline style when aligning the badge, however, I would follow the precedent set in the repo for this. An alternative would be to set the alignment in  `InfoRow` , but I chose to keep that styling more general so it could be used in the future.
+- Maybe rework data fetching to have a loading state and fetch the data in the component. I opted for `getServerSideProps` because the page didn’t seem functional without that data so this would allow it to be preloaded. Although if done properly it should utilise the import the function to get data rather than calling the API route, as well as properly getting the `server` variable based on the environment.
+
 2. What UX or design improvements or alterations might you suggest? These can be to existing components or completely new ideas.
+- Darker colour for text on page to improve contrast.
+- Mortgage section is clickable but has no indication of that.
+- Fix width so page is more responsive on larger screens.
+- Restyle the sections so they could work as more customised “cards”. As each section presents the data similarly, the change could would bring more customisation so each section is emphasised / de-emphasised based on how important the information is.  This would improve the styling on larger screens as they could be styled in a responsive grid or centred in the middle of the screen with a controlled `max-width`.
+- Further emphasise the headings hierarchy. Add additional styles to the typography in order to make the information more discernible.
+- Restyle the edit button to have a better contrast, as well as making it smaller. It could be moved to the top of the screen as it is the main action that can be taken on the page.
+- Potentially add icons if consistent with overall website style.
 
 ----
 
@@ -63,7 +76,7 @@ Most of your work should take place inside the `components/` and `modules/` dire
 
 ### Notes
 
-We recommend working through the list of requirements above but don't expect you to finish all of them. We're more interested in seeing how you approach the problem than seeing a perfect example, please only spend a few hours working on it. 
+We recommend working through the list of requirements above but don't expect you to finish all of them. We're more interested in seeing how you approach the problem than seeing a perfect example, please only spend a few hours working on it.
 
 On completion, email a link to your repository to your contact at Moneyhub, and ensure it is publicly accessible.
 

@@ -84,19 +84,18 @@ const Detail = ({ account }) => {
                     style={{marginLeft: 'auto'}}
                     colour={valuationColour[account.recentValuation.status]}
                   >
-                    {new Intl.NumberFormat("en-GB", {
+                    {`${new Intl.NumberFormat("en-GB", {
                       style: "currency",
                       currency: "GBP",
                       minimumFractionDigits: 0,
                       maximumFractionDigits: 0,
-                    }).format(sincePurchase)}{" "}
-                    (
-                    {new Intl.NumberFormat("en-GB", {
-                      style: "percent",
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }).format(sincePurchasePercentage)}
-                    )
+                    }).format(sincePurchase)} (${
+                      new Intl.NumberFormat("en-GB", {
+                        style: "percent",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2,
+                      }).format(sincePurchasePercentage)
+                     })`}
                   </Badge>
                 </InfoRow>
               </AccountListItem>
@@ -109,7 +108,7 @@ const Detail = ({ account }) => {
                   >
                     {new Intl.NumberFormat("en-GB", {
                       style: "percent",
-                      minimumFractionDigits: 2,
+                      minimumFractionDigits: 0,
                       maximumFractionDigits: 2,
                     }).format(annualAppreciation)}
                   </Badge>
